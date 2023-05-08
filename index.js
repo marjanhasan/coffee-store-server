@@ -28,6 +28,13 @@ async function run() {
 
     const coffeeCollection = client.db("coffeeDB").collection("coffee");
 
+    // data read
+    app.get("/coffee", async (req, res) => {
+      const cursor = coffeeCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // get data from user input(1)
     app.post("/coffee", async (req, res) => {
       const newCoffee = req.body;
